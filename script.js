@@ -169,6 +169,8 @@ function checkAnswer() {
             if (startTimer.currentTimer) {
                 successCountDuringTimer++;
             }
+            // 清空答案框
+            document.getElementById('user-answer').value = '';
         } else {
             const resultDiv = document.getElementById('result-section');
             resultDiv.textContent = '回答错误，请重新尝试。';
