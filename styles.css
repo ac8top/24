@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#question-section,
+#answer-section,
+#result-section,
+#generate-section,
+#buttons-section,
+#challenge-section,
+#title-section,
+#timer-display {
+    margin: 15px;
+}
+
+input {
+    padding: 8px;
+    width: 120px;
+	font-size: 30px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: None;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.question-button {
+    padding: 6px 12px;
+    background-color: #FF9900;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 3px;
+    box-sizing: border-box;
+    border: 2px solid #666; /* 数字按钮边框 */
+    border-radius: 3px; /* 数字按钮圆角 */
+    width: 80px; /* 固定数字按钮宽度 */
+    height: 80px; /* 固定数字按钮高度 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	font-size: 50px;
+}
+
+.question-button:hover {
+    background-color: #CC7A00;
+}
+
+.operator-button {
+    padding: 6px 6px;
+    background-color: #0099FF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 3px;
+	box-sizing: border-box;
+    border: 2px solid #666; /* 数字按钮边框 */
+    border-radius: 3px; /* 数字按钮圆角 */
+    width: 66px; /* 固定数字按钮宽度 */
+    height: 66px; /* 固定数字按钮高度 */
+	font-size: 50px;
+	justify-content: center; /* 居中显示 */
+}
+
+.operator-button:hover {
+    background-color: #007ACC;
+}
+
+select {
+    padding: 5px;
+}
+
+#reset-question {
+    margin-top: 10px;
+    background-color: #FF5733;
+    color: white;
+}
+
+#reset-question:hover {
+    background-color: #CC4626;
+}
+
+#question-frame {
+    display: flex;
+    flex-direction: column; /* 修改为列布局 */
+    justify-content: space-around;
+    align-items: center;
+    width: 200px; /* 固定宽度 */
+    height: 200px; /* 固定高度 */
+}
+
+#question-buttons {
+    display: flex;
+    flex-wrap: wrap; /* 允许换行 */
+    justify-content: center; /* 居中显示 */
+    width: 100%;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear LocalStorage</title>
+</head>
+
+<body>
+    <!-- 创建一个按钮，用于触发清除 localStorage 的操作 -->
+    <button id="clearButton">清除 LocalStorage</button>
+
+    <!-- 引入 JavaScript 代码 -->
+    <script>
+        // 获取按钮元素
+        const clearButton = document.getElementById('clearButton');
+
+        // 为按钮添加点击事件监听器
+        clearButton.addEventListener('click', function () {
+            // 清除 localStorage 中的所有数据
+            localStorage.clear();
+            // 提示用户 localStorage 已清除
+            alert('LocalStorage 已清除');
+        });
+    </script>
+</body>
+
+</html>
