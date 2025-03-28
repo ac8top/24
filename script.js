@@ -1,6 +1,7 @@
-
-        // 用于记录计时器启动后到结束的成功答题数量
+// 用于记录计时器启动后到结束的成功答题数量
         let successCountDuringTimer = 0;
+        // 用于记录每个数字按钮及其在输入框中的位置
+        let buttonPositions = [];
 
         // 生成1到10之间的随机整数
         function generateRandomNumber() {
@@ -172,6 +173,7 @@
                     }
                     // 清空答案框
                     document.getElementById('user-answer').value = '';
+                    buttonPositions = [];
                 } else {
                     const resultDiv = document.getElementById('result-section');
                     resultDiv.textContent = '回答错误，请重新尝试。';
@@ -243,13 +245,23 @@
             const newQuestion = generateQuestion();
             const questionButtonsDiv = document.getElementById('question-buttons');
             questionButtonsDiv.innerHTML = '';
+            buttonPositions = [];
             newQuestion.forEach(num => {
                 const button = document.createElement('button');
                 button.classList.add('question-button');
                 button.textContent = num;
                 button.addEventListener('click', function () {
                     const inputBox = document.getElementById('user-answer');
+                    const currentValue = inputBox.value;
+                    const lastChar = currentValue.slice(-1);
+                    if (/[0-9]/.test(lastChar)) {
+                        alert('不能连续输入两个数字按钮');
+                        return;
+                    }
+                    const startIndex = inputBox.value.length;
                     inputBox.value += num;
+                    const endIndex = inputBox.value.length;
+                    buttonPositions.push({ button, startIndex, endIndex });
                     button.style.display = 'none';
                 });
                 questionButtonsDiv.appendChild(button);
@@ -277,13 +289,23 @@
             const newQuestion = generateQuestion();
             const questionButtonsDiv = document.getElementById('question-buttons');
             questionButtonsDiv.innerHTML = '';
+            buttonPositions = [];
             newQuestion.forEach(num => {
                 const button = document.createElement('button');
                 button.classList.add('question-button');
                 button.textContent = num;
                 button.addEventListener('click', function () {
                     const inputBox = document.getElementById('user-answer');
+                    const currentValue = inputBox.value;
+                    const lastChar = currentValue.slice(-1);
+                    if (/[0-9]/.test(lastChar)) {
+                        alert('不能连续输入两个数字按钮');
+                        return;
+                    }
+                    const startIndex = inputBox.value.length;
                     inputBox.value += num;
+                    const endIndex = inputBox.value.length;
+                    buttonPositions.push({ button, startIndex, endIndex });
                     button.style.display = 'none';
                 });
                 questionButtonsDiv.appendChild(button);
@@ -309,20 +331,29 @@
                 button.style.display = 'block';
             });
             document.getElementById('user-answer').value = '';
+            buttonPositions = [];
             const questionFrame = document.getElementById('question-frame');
             questionFrame.style.flexDirection = 'row';
         });
 
-        // 移除实时计算逻辑
-        // function updateResult() {
-        //     const userAnswer = document.getElementById('user-answer').value;
-        //     try {
-        //         const result = eval(userAnswer);
-        //         document.getElementById('user-answer').value = result;
-        //     } catch (error) {
-        //         // 忽略计算错误情况，保持原输入
-        //     }
-        // }
+        // 退格按钮点击事件
+        document.getElementById('backspace-button').addEventListener('click', () => {
+            const inputBox = document.getElementById('user-answer');
+            let currentValue = inputBox.value;
+            if (currentValue.length > 0) {
+                const lastChar = currentValue.slice(-1);
+                if (/[0-9]/.test(lastChar)) {
+                    const lastButtonPosition = buttonPositions.pop();
+                    if (lastButtonPosition) {
+                        currentValue = currentValue.slice(0, lastButtonPosition.startIndex);
+                        lastButtonPosition.button.style.display = 'block';
+                    }
+                } else {
+                    currentValue = currentValue.slice(0, -1);
+                }
+                inputBox.value = currentValue;
+            }
+        });
 
         // 启动定时器
         function startTimer(seconds) {
@@ -351,4 +382,3 @@
 
         // 页面加载时加载成功次数
         window.addEventListener('load', loadSuccessCount);
-    
